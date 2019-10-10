@@ -1,0 +1,61 @@
+(NOTE: LOCs are where our heap stores to. I'm using 0.)
+
+LOC => stack
+duplicate top
+inputNum => LOC
+[top] => stack
+1 => stack
+MINUS (top -= 1)
+(goto A)
+
+A:
+0 => stack
+LOC => stack
+duplicate top
+inputNum => LOC
+[top] => stack
+1 => stack
+MINUS (top -= 1)
+goto B
+
+B:
+goto D if top is 0
+top => stack
+top => stack
+(top % 3)*(top % 5) => stack
+	-->
+		3 => stack
+		MOD
+		swap stack
+		5 => stack
+		MOD
+		MULT
+goto C if top is 0
+remove top of stack
+1 => stack
+MINUS (top -= 1)
+goto B
+
+C:
+remove top of stack
+top => stack
+LOC => stack
+swap the stack's top two items
+store in heap
+ADD (total += top)
+LOC => stack
+retrieve from heap
+1 => stack
+MINUS (top -= 1)
+goto B
+
+D:
+remove top of stack
+top => OUT
+goto E if top is 0
+1 => stack
+MINUS (top -= 1)
+goto A
+
+E:
+(end)
